@@ -68,12 +68,11 @@ public final class AgentSession: ObservableObject {
             apiKeyManager: apiKeyManager
         )
 
-        // Build tools
-        let tools = buildDefaultTools()
-        agent.setTools(tools)
-
-        // Load resources
+        // Load resources (skills must load before tools)
         loadResources()
+
+        // Build tools (depends on loaded skills)
+        rebuildTools()
 
         // Build system prompt
         rebuildSystemPrompt()
@@ -213,7 +212,17 @@ public final class AgentSession: ObservableObject {
 
     // MARK: - Internal
 
-    private func buildDefaultTools() -> [AgentTool] {
+    /// Maps skill names to the tool each skill provides.
+    private var skillToolFactories: [String: () -> AgentTool] {
+        [
+            "swift-playground": { SwiftTool(cwd: self.cwd).agentTool },
+            "ui-builder": { UIBuilderTool().agentTool },
+            "applescript-automation": { AppleScriptTool().agentTool },
+        ]
+    }
+
+    /// Rebuild the full tool list: 7 core tools + skill-triggered tools + extensions.
+    private func rebuildTools() {
         var tools: [AgentTool] = [
             BashTool(cwd: cwd).agentTool,
             ReadTool(cwd: cwd).agentTool,
@@ -222,15 +231,19 @@ public final class AgentSession: ObservableObject {
             GrepTool(cwd: cwd).agentTool,
             FindTool(cwd: cwd).agentTool,
             LsTool(cwd: cwd).agentTool,
-            SwiftTool(cwd: cwd).agentTool,
-            UIBuilderTool().agentTool,
-            AppleScriptTool().agentTool,
         ]
+
+        // Add tools for loaded skills
+        for skill in skills {
+            if let factory = skillToolFactories[skill.name] {
+                tools.append(factory())
+            }
+        }
 
         // Add extension tools
         tools.append(contentsOf: extensionRunner.allTools)
 
-        return tools
+        agent.setTools(tools)
     }
 
     private func loadResources() {
@@ -265,6 +278,7 @@ public final class AgentSession: ObservableObject {
     public func reloadSkills() {
         let skillResult = loadSkills(cwd: cwd, skillPaths: settingsManager.skillPaths)
         skills = skillResult.skills
+        rebuildTools()
         rebuildSystemPrompt()
     }
 
@@ -357,9 +371,7 @@ public final class AgentSession: ObservableObject {
     /// Rebuild system prompt from editable prompts
     public func applyEditablePrompts() {
         rebuildSystemPrompt()
-        // Also update tool descriptions if customized
-        let tools = buildDefaultTools()
-        agent.setTools(tools)
+        rebuildTools()
     }
 
     private func handleAgentEvent(_ event: AgentEvent) {
