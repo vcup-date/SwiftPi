@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" ry="80" fill="url(#bg)"/>
+
+  <!-- "P" letter - pixel art (each pixel = 28x28, gap=2) -->
+  <!-- P is 5 wide x 8 tall, starting at x=80, y=116 -->
+
+  <!-- P row 0: filled cols 0-3 -->
+  <rect x="80" y="116" width="28" height="28" rx="3" fill="#ffffff"/>
+  <rect x="110" y="116" width="28" height="28" rx="3" fill="#ffffff"/>
+  <rect x="140" y="116" width="28" height="28" rx="3" fill="#ffffff"/>
+  <rect x="170" y="116" width="28" height="28" rx="3" fill="#ffffff"/>
+
+  <!-- P row 1: cols 0,4 -->
+  <rect x="80" y="146" width="28" height="28" rx="3" fill="#ffffff"/>
+  <rect x="200" y="146" width="28" height="28" rx="3" fill="#ffffff"/>
+
+  <!-- P row 2: cols 0,4 -->
+  <rect x="80" y="176" width="28" height="28" rx="3" fill="#ffffff"/>
+  <rect x="200" y="176" width="28" height="28" rx="3" fill="#ffffff"/>
+
+  <!-- P row 3: cols 0-3 (close the bump) -->
+  <rect x="80" y="206" width="28" height="28" rx="3" fill="#ffffff"/>
+  <rect x="110" y="206" width="28" height="28" rx="3" fill="#ffffff"/>
+  <rect x="140" y="206" width="28" height="28" rx="3" fill="#ffffff"/>
+  <rect x="170" y="206" width="28" height="28" rx="3" fill="#ffffff"/>
+
+  <!-- P row 4: col 0 -->
+  <rect x="80" y="236" width="28" height="28" rx="3" fill="#ffffff"/>
+
+  <!-- P row 5: col 0 -->
+  <rect x="80" y="266" width="28" height="28" rx="3" fill="#ffffff"/>
+
+  <!-- P row 6: col 0 -->
+  <rect x="80" y="296" width="28" height="28" rx="3" fill="#ffffff"/>
+
+  <!-- P row 7: col 0 -->
+  <rect x="80" y="326" width="28" height="28" rx="3" fill="#ffffff"/>
+
+
+  <!-- "i" letter - pixel art -->
+  <!-- i is 3 wide x 8 tall, starting at x=280, y=116 -->
+
+  <!-- i dot: row 0, col 1 (center) -->
+  <rect x="310" y="116" width="28" height="28" rx="3" fill="#ffffff"/>
+
+  <!-- i row 1: empty (gap between dot and body) -->
+
+  <!-- i row 2: cols 0-2 -->
+  <rect x="280" y="176" width="28" height="28" rx="3" fill="#ffffff"/>
+  <rect x="310" y="176" width="28" height="28" rx="3" fill="#ffffff"/>
+  <rect x="340" y="176" width="28" height="28" rx="3" fill="#ffffff"/>
+
+  <!-- i row 3: col 1 -->
+  <rect x="310" y="206" width="28" height="28" rx="3" fill="#ffffff"/>
+
+  <!-- i row 4: col 1 -->
+  <rect x="310" y="236" width="28" height="28" rx="3" fill="#ffffff"/>
+
+  <!-- i row 5: col 1 -->
+  <rect x="310" y="266" width="28" height="28" rx="3" fill="#ffffff"/>
+
+  <!-- i row 6: col 1 -->
+  <rect x="310" y="296" width="28" height="28" rx="3" fill="#ffffff"/>
+
+  <!-- i row 7: cols 0-2 -->
+  <rect x="280" y="326" width="28" height="28" rx="3" fill="#ffffff"/>
+  <rect x="310" y="326" width="28" height="28" rx="3" fill="#ffffff"/>
+  <rect x="340" y="326" width="28" height="28" rx="3" fill="#ffffff"/>
+</svg>

@@ -1,0 +1,43 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Xcode
+build/
+DerivedData/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcworkspace/xcuserdata/
+xcuserdata/
+
+# Swift Package Manager
+.build/
+.swiftpm/xcode/package.xcworkspace/xcuserdata/
+.swiftpm/xcode/xcuserdata/
+Package.resolved
+
+# IDE
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Secrets / environment
+.env
+.env.*
+*.key
+*.pem
+api-keys.json
+
+# Release artifacts
+release/
+
+# Internal docs
+docs/
+
+# Misc
+*.log
+Thumbs.db
