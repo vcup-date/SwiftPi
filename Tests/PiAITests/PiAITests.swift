@@ -51,7 +51,7 @@ final class PiAITests: XCTestCase {
     func testAssistantMessageCreation() {
         let msg = AssistantMessage(
             content: [.text(TextContent(text: "Hi there"))],
-            model: "claude-sonnet-4-5"
+            model: "gpt-4o"
         )
         XCTAssertEqual(msg.textContent, "Hi there")
         XCTAssertFalse(msg.hasToolCalls)
@@ -83,7 +83,6 @@ final class PiAITests: XCTestCase {
 
     func testBuiltinModelsExist() {
         XCTAssertFalse(BuiltinModels.all.isEmpty)
-        XCTAssertNotNil(BuiltinModels.find("claude"))
         XCTAssertNotNil(BuiltinModels.find("gpt-4o"))
     }
 
@@ -165,37 +164,34 @@ final class PiAITests: XCTestCase {
         let manager = APIKeyManager(keys: [])
 
         manager.setKey(APIKeyManager.ProviderKey(
-            provider: "anthropic",
+            provider: "openai",
             name: "test",
-            apiKey: "sk-ant-test123",
+            apiKey: "sk-test123",
             isSelected: true
         ))
 
-        XCTAssertEqual(manager.apiKey(for: "anthropic"), "sk-ant-test123")
-        XCTAssertNil(manager.apiKey(for: "openai"))
+        XCTAssertEqual(manager.apiKey(for: "openai"), "sk-test123")
+        XCTAssertNil(manager.apiKey(for: "google"))
 
         manager.setKey(APIKeyManager.ProviderKey(
-            provider: "anthropic",
+            provider: "openai",
             name: "work",
-            apiKey: "sk-ant-work456",
+            apiKey: "sk-work456",
             isSelected: false
         ))
 
         // Still returns the selected one
-        XCTAssertEqual(manager.apiKey(for: "anthropic"), "sk-ant-test123")
+        XCTAssertEqual(manager.apiKey(for: "openai"), "sk-test123")
 
         // Select the other
-        manager.selectKey(provider: "anthropic", name: "work")
-        XCTAssertEqual(manager.apiKey(for: "anthropic"), "sk-ant-work456")
+        manager.selectKey(provider: "openai", name: "work")
+        XCTAssertEqual(manager.apiKey(for: "openai"), "sk-work456")
     }
 
     // MARK: - Provider Registry
 
     func testProviderRegistry() {
         initializePiAI()
-
-        let anthropic = ProviderRegistry.shared.provider(for: .known(.anthropicMessages))
-        XCTAssertNotNil(anthropic)
 
         let openai = ProviderRegistry.shared.provider(for: .known(.openaiResponses))
         XCTAssertNotNil(openai)

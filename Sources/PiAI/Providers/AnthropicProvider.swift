@@ -1,6 +1,6 @@
 import Foundation
 
-// MARK: - Anthropic Messages API Provider
+// MARK: - Messages API Provider
 
 public final class AnthropicProvider: LLMProvider, @unchecked Sendable {
     public let api: Api = .known(.anthropicMessages)

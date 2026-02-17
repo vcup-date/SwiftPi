@@ -301,19 +301,19 @@ final class PiCodingAgentTests: XCTestCase {
     // MARK: - Model Resolver
 
     func testResolveModel() {
-        let result = resolveModel("claude-sonnet-4-5-20250929")
+        let result = resolveModel("gpt-4o")
         XCTAssertNotNil(result)
-        XCTAssertEqual(result?.model.id, "claude-sonnet-4-5-20250929")
+        XCTAssertEqual(result?.model.id, "gpt-4o")
     }
 
     func testResolveModelPartial() {
-        let result = resolveModel("sonnet")
+        let result = resolveModel("mini")
         XCTAssertNotNil(result)
-        XCTAssertTrue(result!.model.name.contains("Sonnet"))
+        XCTAssertTrue(result!.model.name.contains("Mini"))
     }
 
     func testResolveModelWithThinking() {
-        let result = resolveModel("sonnet:high")
+        let result = resolveModel("o3:high")
         XCTAssertNotNil(result)
         XCTAssertEqual(result?.thinkingLevel, .high)
     }

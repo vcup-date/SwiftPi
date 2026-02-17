@@ -156,7 +156,7 @@ public struct SkillBrowser: View {
                 .buttonStyle(.plain)
             }
 
-            Text("Describe what the skill should do. The AI will create a skill following Claude's Agent Skills standard.")
+            Text("Describe what the skill should do. The AI will create a skill following the Skills standard.")
                 .font(.caption2)
                 .foregroundColor(.secondary)
 

@@ -66,43 +66,6 @@ public struct ModelCost: Codable, Sendable, Equatable {
 // MARK: - Built-in Models
 
 public enum BuiltinModels {
-    // Anthropic
-    public static let claude4Opus = LLMModel(
-        id: "claude-opus-4-6",
-        name: "Claude Opus 4.6",
-        api: .known(.anthropicMessages),
-        provider: .known(.anthropic),
-        reasoning: true,
-        inputModalities: ["text", "image"],
-        cost: ModelCost(input: 15, output: 75, cacheRead: 1.5, cacheWrite: 18.75),
-        contextWindow: 200_000,
-        maxTokens: 32_000
-    )
-
-    public static let claude4Sonnet = LLMModel(
-        id: "claude-sonnet-4-5-20250929",
-        name: "Claude Sonnet 4.5",
-        api: .known(.anthropicMessages),
-        provider: .known(.anthropic),
-        reasoning: true,
-        inputModalities: ["text", "image"],
-        cost: ModelCost(input: 3, output: 15, cacheRead: 0.3, cacheWrite: 3.75),
-        contextWindow: 200_000,
-        maxTokens: 16_384
-    )
-
-    public static let claude4Haiku = LLMModel(
-        id: "claude-haiku-4-5-20251001",
-        name: "Claude Haiku 4.5",
-        api: .known(.anthropicMessages),
-        provider: .known(.anthropic),
-        reasoning: false,
-        inputModalities: ["text", "image"],
-        cost: ModelCost(input: 0.8, output: 4, cacheRead: 0.08, cacheWrite: 1),
-        contextWindow: 200_000,
-        maxTokens: 8_192
-    )
-
     // OpenAI
     public static let gpt4o = LLMModel(
         id: "gpt-4o",
@@ -154,7 +117,6 @@ public enum BuiltinModels {
 
     /// All built-in models
     public static let all: [LLMModel] = [
-        claude4Opus, claude4Sonnet, claude4Haiku,
         gpt4o, gpt4oMini, o3, o4Mini
     ]
 

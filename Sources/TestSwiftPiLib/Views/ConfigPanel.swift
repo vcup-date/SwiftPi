@@ -14,13 +14,12 @@ public struct ConfigPanel: View {
     @State private var newKeyBaseUrl = ""
     @State private var showAddKey = false
     @State private var customModelId = ""
-    @State private var customModelApi: Api = .known(.anthropicMessages)
+    @State private var customModelApi: Api = .known(.openaiResponses)
     @State private var customContextWindow = "200000"
     @State private var customMaxTokens = "16384"
 
     // Well-known providers with their base URLs
     private static let knownProviders: [(name: String, baseUrl: String?)] = [
-        ("anthropic", nil),
         ("openai", nil),
         ("openrouter", "https://openrouter.ai/api/v1"),
         ("together", "https://api.together.xyz/v1"),
@@ -68,7 +67,7 @@ public struct ConfigPanel: View {
                     .font(.caption)
                     .foregroundColor(.secondary)
                     .frame(width: 70, alignment: .trailing)
-                TextField("e.g. anthropic/claude-sonnet-4, openai/gpt-4o, meta-llama/llama-3-70b", text: $customModelId)
+                TextField("e.g. openai/gpt-4o, meta-llama/llama-3-70b, deepseek/deepseek-r1", text: $customModelId)
                     .textFieldStyle(.roundedBorder)
                     .font(.system(.body, design: .monospaced))
                     .onAppear { syncFromSession() }
@@ -81,9 +80,9 @@ public struct ConfigPanel: View {
                     .foregroundColor(.secondary)
                     .frame(width: 70, alignment: .trailing)
                 Picker("", selection: $customModelApi) {
-                    Text("Anthropic Messages").tag(Api.known(.anthropicMessages))
-                    Text("OpenAI Chat Completions").tag(Api.known(.openaiCompletions))
                     Text("OpenAI Responses").tag(Api.known(.openaiResponses))
+                    Text("OpenAI Chat Completions").tag(Api.known(.openaiCompletions))
+                    Text("Messages API").tag(Api.known(.anthropicMessages))
                 }
                 .pickerStyle(.segmented)
             }
@@ -126,29 +125,6 @@ public struct ConfigPanel: View {
                     .foregroundColor(.secondary)
             }
 
-            // Quick presets (small, secondary)
-            DisclosureGroup("Presets") {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 130))], spacing: 4) {
-                    ForEach(BuiltinModels.all, id: \.id) { model in
-                        Button {
-                            customModelId = model.id
-                            customModelApi = model.api
-                            customContextWindow = "\(model.contextWindow)"
-                            customMaxTokens = "\(model.maxTokens)"
-                            applyCustomModel()
-                        } label: {
-                            Text(model.name)
-                                .font(.caption)
-                                .frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(.bordered)
-                        .controlSize(.small)
-                        .tint(session.model.id == model.id ? .accentColor : .secondary)
-                    }
-                }
-            }
-            .font(.caption)
-            .foregroundColor(.secondary)
         }
     }
 
@@ -156,10 +132,9 @@ public struct ConfigPanel: View {
         // Determine provider from selected API key or model ID
         let selectedKey = apiKeyManager.keys.first(where: { $0.isSelected })
         let baseUrl = selectedKey?.baseUrl
-        let providerName = selectedKey?.provider ?? "anthropic"
+        let providerName = selectedKey?.provider ?? "openai"
         let provider: Provider
         switch providerName {
-        case "anthropic": provider = .known(.anthropic)
         case "openai": provider = .known(.openai)
         case "google": provider = .known(.google)
         default: provider = .custom(providerName)
@@ -260,7 +235,7 @@ public struct ConfigPanel: View {
                     .font(.caption)
                     .foregroundColor(.secondary)
                     .frame(width: 60, alignment: .trailing)
-                TextField("e.g. openrouter, anthropic, openai, together...", text: $newKeyProvider)
+                TextField("e.g. openrouter, openai, together, deepseek...", text: $newKeyProvider)
                     .textFieldStyle(.roundedBorder)
                     .font(.system(.body, design: .monospaced))
             }

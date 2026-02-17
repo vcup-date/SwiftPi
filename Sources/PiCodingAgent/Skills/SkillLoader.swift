@@ -159,7 +159,7 @@ public func loadSkillsFromDir(_ dir: String, source: SkillSource) -> LoadSkillsR
                 }
             }
 
-            // Check subdirectories for SKILL.md (Claude Agent Skills directory format)
+            // Check subdirectories for SKILL.md (directory-style skill format)
             if isDirectory(fullPath) && !file.hasPrefix(".") && file != "node_modules" {
                 let skillMd = (fullPath as NSString).appendingPathComponent("SKILL.md")
                 if FileManager.default.fileExists(atPath: skillMd) {

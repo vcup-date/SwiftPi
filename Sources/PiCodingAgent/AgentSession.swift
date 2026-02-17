@@ -294,7 +294,7 @@ public final class AgentSession: ObservableObject {
             skillPrompt = """
             Create a new directory-style skill in \(targetDir). The user wants: \(description)
 
-            Follow the Claude Agent Skills standard. Create a directory structure like:
+            Follow the Skills standard. Create a directory structure like:
 
             \(targetDir)/<skill-name>/
             ├── SKILL.md          (main instructions with YAML frontmatter)
@@ -334,7 +334,7 @@ public final class AgentSession: ObservableObject {
             skillPrompt = """
             Create a new skill file in \(targetDir). The user wants: \(description)
 
-            Follow the Claude Agent Skills standard. Create a single .md file with this format:
+            Follow the Skills standard. Create a single .md file with this format:
 
             ```
             ---

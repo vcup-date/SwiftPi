@@ -30,7 +30,7 @@ Zero external dependencies. Just Foundation and SwiftUI.
 
 | Module | What it does |
 |---|---|
-| **PiAI** | Multi-provider LLM API with streaming (Anthropic, OpenAI) |
+| **PiAI** | Multi-provider LLM API with streaming |
 | **PiAgent** | Agent loop, tool calling, event system |
 | **PiCodingAgent** | 7 coding tools, sessions, skills, extensions, compaction |
 | **TestSwiftPiLib** | SwiftUI views for the demo app |
@@ -38,7 +38,7 @@ Zero external dependencies. Just Foundation and SwiftUI.
 
 ## Features
 
-- **Multi-provider LLM support** — Anthropic, OpenAI, pluggable provider registry
+- **Multi-provider LLM support** — pluggable provider registry, bring any API
 - **Streaming responses** — SSE parsing, `AsyncSequence` event streams
 - **Extended thinking** — reasoning mode with configurable token budgets
 - **7 built-in tools** — Bash, Read, Write, Edit, Grep, Find, Ls
@@ -70,8 +70,8 @@ Or open `Package.swift` in Xcode and hit Run.
 Set via environment variables or the app's config panel:
 
 ```bash
-export ANTHROPIC_API_KEY="your-key"
 export OPENAI_API_KEY="your-key"
+# or any provider key — see the app's config panel
 ```
 
 Keys are stored locally at `~/.swiftpi/api-keys.json` and never leave your machine.
